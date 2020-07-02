@@ -14,7 +14,7 @@ The core nix packages do contain tools like Purescript and Dhall, but these can 
 Using them
 ----------
 
-An up to date and working `shell.nix <https://github.com/id3as/demo-ps/blob/master/env/common/shell.nix>`_ can be found in the `demo_ps project <https://github.com/id3as/demo_ps>`_ and can usually be copied as-is.  Combined with `direnv <https://direnv.net/>`_, a sensible nix-shell can automatically provide a functional Purerl development environment as soon as you enter the directory for a project.
+An up to date and working `shell.nix <https://github.com/id3as/demo-ps/blob/master/shell.nix>`_ can be found in the `demo_ps project <https://github.com/id3as/demo_ps>`_ and can usually be copied as-is.  Combined with `direnv <https://direnv.net/>`_, a sensible nix-shell can automatically provide a functional Purerl development environment as soon as you enter the directory for a project.
 
 Essentially if the .envrc does
 
@@ -22,10 +22,20 @@ Essentially if the .envrc does
 
   use_nix
 
-
 And a shell.nix is provided next to this file, for example
 
-.. literalinclude:: /demo-ps/env/common/shell.nix
+.. literalinclude:: /demo-ps/shell.nix
   :language: nix
 
-Then all the tooling required will be available for building the project, simples.
+Then allowing direnv to execute within the directory will provide all the tooling required for building the project once nix has downloaded and built the required assets, simples. Building and running the project from within this nix shell therefore looks like this:
+
+.. code-block:: bash
+
+  # Compile the project
+  rebar3 compile
+
+  # Build a release
+  rebar3 release
+
+  # Run the whole shebang
+  ./run
