@@ -27,6 +27,5 @@ And a shell.nix is provided next to this file, for example
 
 .. literalinclude:: /demo-ps/env/common/shell.nix
   :language: nix
-  :linenos:
 
 Then all the tooling required will be available for building the project, simples.
