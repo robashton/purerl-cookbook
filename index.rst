@@ -15,7 +15,7 @@ If you feel anything is missing, please head over to Github and open an issue or
    :hidden:
 
    Build Environments <devenv/index>
-   Application Skeleton <skeleton/index>
+   Application Structure <structure/index>
 
 
 Index

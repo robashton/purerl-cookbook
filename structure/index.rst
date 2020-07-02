@@ -9,9 +9,9 @@ The easy solution for the most part is to copy an empty application (like  `demo
 
 For the purposes of this section we'll separate these various aspects into
 
-* Erlang: The various files needed to support a plain ol' Erlang Application
-* Purescript: The various files needed to support a client-side Purescript application
-* Purerl: The various files needed to support a server-side Purescript application
+* :doc:`Erlang <erlang>`: The various files needed to support a plain ol' Erlang Application
+* :doc:`Purerl <purerl>`: The various files needed to support a server-side Purescript application
+* :doc:`Purescript <purescript>`: The various files needed to support a client-side Purescript application
 
 
 .. toctree::

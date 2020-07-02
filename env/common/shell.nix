@@ -24,6 +24,7 @@ mkShell {
   buildInputs = with pkgs; [
     python27Packages.sphinx
     python27Packages.readthedocs-sphinx-ext
+    python27Packages.sphinx_rtd_theme
     python27Packages.recommonmark
    ];
 }
