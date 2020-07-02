@@ -1,0 +1,3 @@
+[submodule "demo-ps"]
+	path = demo-ps
+	url = https://github.com/id3as/demo-ps
