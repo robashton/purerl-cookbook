@@ -15,3 +15,8 @@ When we compile the *.purs*, the module created is camelCased and the suffix '@p
 
 What does this module look like?
 
+.. literalinclude:: /demo-ps/server/src/BookApp.purs
+  :language: haskell
+  :linenos:
+
+Almost inconsequential. In our Erlang apps we sometimes do a bit of housekeeping as part of startup, but the most basic application is essentially a proxy for starting the top level supervisor, so Pinto provides *App.simpleStart* for that case.
