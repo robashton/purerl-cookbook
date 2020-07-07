@@ -18,6 +18,7 @@ If you feel anything is missing, please head over to Github and open an issue or
    Application Structure <structure/index>
    Basic OTP <otp/index>
    Web server <web/index>
+   Logging <logging/index>
 
 
 Navigation
@@ -33,3 +34,4 @@ If you're still stuck, then e-mail me at robashton@codeofrob.com, or `file an is
 * :doc:`Application Structure<structure/index>`
 * :doc:`Basic OTP<otp/index>`
 * :doc:`Web server <web/index>`
+* :doc:`Logging <logging/index>`

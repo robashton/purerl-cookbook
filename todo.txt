@@ -1,0 +1,17 @@
+- [x] Update nixpkgs-purerl
+- [x] Update purescript-erl-logger
+- [x] Update arqiva to use erl-logger
+- [x] Nameless gen servers in Pinto
+- [x] Update purescript-erl-cowboy
+- [x] Update demo_ps to use new purerl
+- [x] Merge erl-stetson to master
+- [x] Merge erl-pinto to master
+- [x] Update package set to include purescript-erl-logger
+- [x] Update package set to include latest stetson
+- [x] Update package set to include latest pinto
+- [x] Update package set to include simplebus
+- [x] Do a readme for purescript-erl-logger
+- [x] Do a readme for purescript-erl-simplebus
+- [ ] Update demo_ps to use Logger
+- [ ] Create template repository from demo_ps
+
