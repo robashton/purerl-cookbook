@@ -17,7 +17,7 @@ The underlying logger module is capable of much more than is presently exposed i
    _ <- Logger.info metadata report
 
 
-This is obviously quite verbose, but in essence we end up with per-project helpers for the various domains present within the project that help us do the logging that we need (and indeed then filterable by domain).
+This is obviously quite verbose, but in essence we end up with per-project helpers for the various domains present within the project that help us do the logging that we need across them.
 
 .. code-block:: haskell
 
