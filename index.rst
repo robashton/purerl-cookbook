@@ -17,8 +17,10 @@ If you feel anything is missing, please head over to Github and open an issue or
    Build Environments <devenv/index>
    Application Structure <structure/index>
    Basic OTP <otp/index>
-   Web server <web/index>
+   Building a web server <web/index>
    Logging <logging/index>
+   Messaging <messaging/index>
+   Interop/FFI <interop/index>
 
 
 Navigation
@@ -33,5 +35,7 @@ If you're still stuck, then e-mail me at robashton@codeofrob.com, or `file an is
 * :doc:`Building demo_ps<devenv/index>`
 * :doc:`Application Structure<structure/index>`
 * :doc:`Basic OTP<otp/index>`
-* :doc:`Web server <web/index>`
+* :doc:`Building a web server <web/index>`
 * :doc:`Logging <logging/index>`
+* :doc:`Messaging <messaging/index>`
+* :doc:`Interop/FFI <interop/index>`
