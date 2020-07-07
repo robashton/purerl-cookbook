@@ -12,6 +12,6 @@
 - [x] Update package set to include simplebus
 - [x] Do a readme for purescript-erl-logger
 - [x] Do a readme for purescript-erl-simplebus
-- [ ] Update demo_ps to use Logger
+- [x] Update demo_ps to use Logger
 - [ ] Create template repository from demo_ps
 

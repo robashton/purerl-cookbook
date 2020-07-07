@@ -11,7 +11,8 @@ The underlying logger module is capable of much more than is presently exposed i
 
 .. code-block:: haskell
 
-  let metadata = Logger.traceMetadata (atom "the_domain" : nil) "This is the message for the log"
+  let domain = (atom "the_domain" : nil)
+      metadata = Logger.traceMetadata domain "This is the message for the log"
       report = {}
     in
       Logger.info metadata report
