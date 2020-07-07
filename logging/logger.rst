@@ -14,8 +14,7 @@ The underlying logger module is capable of much more than is presently exposed i
   let domain = (atom "the_domain" : nil)
       metadata = Logger.traceMetadata domain "This is the message for the log"
       report = {}
-    in
-      Logger.info metadata report
+   _ <- Logger.info metadata report
 
 
 This is obviously quite verbose, but in essence we end up with per-project helpers for the various domains present within the project that help us do the logging that we need (and indeed then filterable by domain).
