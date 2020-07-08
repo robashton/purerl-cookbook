@@ -85,7 +85,7 @@ So how we do we send this newly awakened process a message? We're presently disc
     pure { child }
 
 
-Next up we'll probably want to get a message back from our long running process, to do that we'll want to pass the *childProcess* a reference to ourself so it can do that. Rather than trying to separate our datatypes with emitters, it's easiest to just give it a *Process Msg*, wheree Msg is our Gen server's msg type. Typically in this sort of setup the code is tightly coupled anyway because we're just trying to orchestrate a long running process within the same module and setting up layers of indirection isn't helpful when trying to re-read the code later.
+Next up we'll probably want to get a message back from our long running process, to do that we'll want to pass the *childProcess* a reference to ourself so it can do that. Rather than trying to separate our datatypes with emitters, it's easiest to just give it a *Process Msg*, where Msg is our Gen server's msg type. Typically in this sort of setup the code is tightly coupled anyway because we're just trying to orchestrate a long running process within the same module and setting up layers of indirection isn't helpful when trying to re-read the code later.
 
 
 .. code-block:: haskell

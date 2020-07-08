@@ -42,6 +42,7 @@ release = u''
 
 extensions = [
     "sphinx_rtd_theme"
+ # ,"sphinxcontrib-spelling" # doesn't work in nix for some reason
 ]
 
 # Add any paths that contain templates here, relative to this directory.
