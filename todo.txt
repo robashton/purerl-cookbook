@@ -14,4 +14,11 @@
 - [x] Do a readme for purescript-erl-simplebus
 - [x] Update demo_ps to use Logger
 - [ ] Create template repository from demo_ps
-
+- [ ] Write another read-the-docs for "getting started" with that template repository
+- [ ] Getting the build env sorted (we can link..)
+- [ ] Running the empty project
+- [ ] Adding a line of logging (hello world)
+- [ ] Creating a gen server
+- [ ] Creating a model
+- [ ] Using a redis wrapper
+- [ ] Writing a web API to get/put data
