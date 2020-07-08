@@ -10,7 +10,7 @@ The best practise is to write *thin* bindings that exactly represent the underly
 * :doc:`FFI <ffi>`
 * :doc:`Effects <effects>`
 * :doc:`Errors <errors>`
-* :doc:`messaging <messaging>`
+* :doc:`Messaging <messaging>`
 
 .. toctree::
    :hidden:
