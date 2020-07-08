@@ -1,7 +1,7 @@
 The Purerl Cookbook
 ###################
 
-This is a collection of code examples/explanations of most things you might want to do in the Purerl world, all the code examples are from the `demo_ps <https://github.com/id3as/demo-ps>`_ project so having that cloned locally will help as you read through these docs.
+This is a collection of code examples/explanations of most things you might want to do in the Purerl world, most the code examples are from, or related to the `demo_ps <https://github.com/id3as/demo-ps>`_ project so having that cloned locally will help as you read through these docs.
 
 If you feel anything is missing, please head over to Github and open an issue or pull request and we'll try and get it sorted.
 

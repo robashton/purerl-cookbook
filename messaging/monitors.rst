@@ -36,10 +36,20 @@ It's quite common to disregard this message entirely as we can bundle the inform
   self <- Gen.self
   Monitor.pid pid (\_ -> self ! ProcessDown pid)
 
-There is an equivalent to *Monitor.pid* for (Process msg), *Monitor.process* which works in exactly the same way and entirely disregards the *msg* type.
+There is an equivalent to *Monitor.pid* for (Process msg), *Monitor.process* which works in exactly the same way and entirely disregards the *msg* type of the Process (Process msg is just a newtype for Pid anyway)
 
 Gen servers
 ===========
+
+Gen servers obviously have a pid and there is short-hand available for monitoring a gen server in Pinto, providing the serverName is exported from the gen server. Presently this takes two emitters, one for when the process goes down and one for when the process is already down. This may yet change to simply return a success value, this API has emerged as a result of mirroring the behaviour of the existing monitors and possibly isn't optimal.
+
+.. code-block:: haskell
+
+  data Msg = 
+    ProcessDown Pid
+
+  self <- Gen.self
+  Gen.monitor ExternalGen.serverName (\_ -> self ! ProcessDown) (self ! ProcessAlreadyDown)
 
 
 
