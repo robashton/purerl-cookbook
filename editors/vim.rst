@@ -88,5 +88,6 @@ This is quite a basic setup, config can be passed to the language server to make
 
 The functionality is *rich* compared to the plain psc-ide experience, and is more fully documented on the vim-lsp github page. 
 
-In this default state, the editor will need restarting between editing client/server projects, with the use of local config this could probably be obliviated (separate ports for the language server, etc).
+In this default state, the editor will need restarting between editing client/server projects, with the use of local config this could probably be obliviated (separate ports for the language server, etc)
 
+Code updates should generally be reflected much more responsively, so this makes for a much smoother experience than the direct psc-ide integration.
