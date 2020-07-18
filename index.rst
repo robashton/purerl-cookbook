@@ -15,6 +15,7 @@ If you feel anything is missing, please head over to Github and open an issue or
    :hidden:
 
    Build Environments <devenv/index>
+   Editor Setup <editors/index>
    Application Structure <structure/index>
    Basic OTP <otp/index>
    Building a web server <web/index>
@@ -34,6 +35,7 @@ If you're still stuck, then e-mail me at robashton@codeofrob.com, or `file an is
 
 * :doc:`Building demo_ps<devenv/index>`
 * :doc:`Application Structure<structure/index>`
+* :doc:`Editor Setup<editors/index>`
 * :doc:`Basic OTP<otp/index>`
 * :doc:`Building a web server <web/index>`
 * :doc:`Logging <logging/index>`
