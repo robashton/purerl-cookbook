@@ -35,7 +35,7 @@ This is now my preferred way to set up my editor, as projects targetting LSP are
 What we need is
 
 * `vim-lsp <https://github.com/prabirshrestha/vim-lsp>`_: An arbitrarily chosen LSP plugin for VIM
-*  `purescript-language-server <https://github.com/nwolverson/purescript-language-server>`_: The language server
+* `purescript-language-server <https://github.com/nwolverson/purescript-language-server>`_: The language server
 * `vim-purescript <https://github.com/purescript-contrib/purescript-vim>`_: Syntax highlighting (still)
 
 The bare minimum config for getting this up and running is 
