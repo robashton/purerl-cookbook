@@ -30,7 +30,7 @@ That said, I worked like this for two years without updating once so that's nice
 With Language Server
 ********************
 
-This is now my preferred way to set up my editor, as projects targetting LSP are far likely to be maintained as they're agnostic to underlying technology choices. (Relying on random Github repos with vim script in for uncommon language integration is a bit old hat).
+This is now my preferred way to set up my editor, as projects targetting LSP are far likely to be maintained as they're agnostic to underlying technology choices. (Relying on random Github repos with vim script in for uncommon language integration is asking for trouble).
 
 What we need is
 
@@ -40,7 +40,7 @@ What we need is
 
 The bare minimum config for getting this up and running is 
 
-.. code-block::
+.. code-block:: bash
 
   if executable('purescript-language-server')
       au User lsp_setup call lsp#register_server({
@@ -53,7 +53,7 @@ The bare minimum config for getting this up and running is
 
 But it's  a bit better if you at least set the rootUri based on the manifest location, as that's rarely going to be the root of the Git repo in a Purerl project.
 
-.. code-block::
+.. code-block:: bash
 
   if executable('purescript-language-server')
       au User lsp_setup call lsp#register_server({
@@ -70,7 +70,7 @@ But it's  a bit better if you at least set the rootUri based on the manifest loc
 
 Obviously it can then be configured further, and extra keybindings can be added when a buffer is opened in this mode
 
-.. code-block::
+.. code-block:: bash
 
   function! s:on_lsp_buffer_enabled() abort
       setlocal omnifunc=lsp#complete
