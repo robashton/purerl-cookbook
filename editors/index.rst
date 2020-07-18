@@ -16,6 +16,6 @@ If your editor is not listed, chances are you can get it working easily enough u
    :titlesonly:
 
    Vim <vim>
-   Emacs <emacs>
    VSCode <vscode>
+   Emacs <emacs>
 
