@@ -6,7 +6,7 @@ Obviously the short answer to this page is use :doc:`vim <vim>` but if you're al
 The majority of our team is using Emacs with psc-ide integration directly, but seeing as Language Server Protocol is a thing it's unlikely this will be the case for too much longer.
 
 Without Language Server
-=======================
+***********************
 
 The best place to find Emacs configuration is `@philipstears <http://twitter.com/philipstears>`_ `nixos-install <https://github.com/philipstears/nixos-install>`_ repo as that's not only well maintained but in general also well thought out too.
 
@@ -37,7 +37,7 @@ The relevant config in emacs  at that point is
           (define-key evil-insert-state-local-map (kbd "C-]") 'psc-ide-goto-definition)))
 
 With Language Server
-====================
+********************
 
 The `purescript-language-server <https://github.com/nwolverson/purescript-language-server>`_ needs installing somewhere, and the following packages need to be present in emacs (again, all available in Melpa).
 
