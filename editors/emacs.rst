@@ -51,4 +51,6 @@ lsp-mode has support for Purescript built in, and just needs spinning up for pur
   (add-hook 'purescript-mode-hook #'lsp)
 
 `Further docs for this are worth reading <https://emacs-lsp.github.io/lsp-mode/page/installation/>`_, I'm not an Emacs user so YMMV.
+
+Feel free to send me a pull request for this page if you have a good Emacs set up based on either of the above, as I find both of these default setups to be distinctly lacking and don't know enough about Emacs to fix it.
           
