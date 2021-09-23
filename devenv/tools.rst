@@ -13,12 +13,12 @@ At the heart of it, Purescript is just a binary *'purs'* that knows how to compi
 `Purerl <https://github.com/purerl/purescript>`_ 
 ***************************************************
 
-Purs (above) supports different backends, so with the right switches we can use a different backend and compile into something else. In this case we're compiling the Purescript into Erlang.
+Purs (above) supports different backends, so with the right switches (in spago.dhall) we can use a different backend and compile into something else. In this case we're compiling the Purescript into Erlang.
 
 `Spago <https://github.com/purescript/spago>`_ 
 ***************************************************
 
-Spago is a build tool used for both Purescript on the frontend and Purerl on the backend, it is used to download dependencies for the relevant applicaiton and also to configure the inputs to the purs compiler. That is which files it needs to compile, which backend to use for that compilation process amongst any other flags configureed.
+Spago is a build tool used for both Purescript on the frontend and Purerl on the backend, it is used to download dependencies for the relevant application and also to configure the inputs to the purs compiler. That is which files it needs to compile, which backend to use for that compilation process amongst any other flags configureed.
 
 `Dhall <https://dhall-lang.org/>`_ 
 ***************************************************

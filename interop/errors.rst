@@ -64,3 +64,5 @@ and
     end.
 
 This is typically the pattern for mapping to code that returns Purescript types and if you find yourself writing more code than this in Erlang then it's a sign that the FFI is too heavy and a thinner layer (and more Purescript) is required.
+
+*Note: While the above is "correct", it must be pointed out that in most of our code these days, we simply return {just} and {nothing} from FFI as a matter of course as it is very common - for most other data types however, constructors are still passed in.*

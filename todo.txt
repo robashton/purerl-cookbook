@@ -1,29 +1,8 @@
-- [x] Update nixpkgs-purerl
-- [x] Update purescript-erl-logger
-- [x] Update arqiva to use erl-logger
-- [x] Nameless gen servers in Pinto
-- [x] Update purescript-erl-cowboy
-- [x] Update demo_ps to use new purerl
-- [x] Merge erl-stetson to master
-- [x] Merge erl-pinto to master
-- [x] Update package set to include purescript-erl-logger
-- [x] Update package set to include latest stetson
-- [x] Update package set to include latest pinto
-- [x] Update package set to include simplebus
-- [x] Do a readme for purescript-erl-logger
-- [x] Do a readme for purescript-erl-simplebus
-- [x] Update demo_ps to use Logger
-- [ ] How to: Vim
-- [ ] How to: Emacs
-- [ ] How to: VSCode
-- [ ] Update Purerl packages to use spago/etc using erl-maps as basis
+Here we go again..
+====
 
-- [ ] Create template repository from demo_ps
-- [ ] Write another read-the-docs for "getting started" with that template repository
-  - [ ] Getting the build env sorted (we can link..)
-  - [ ] Running the empty project
-  - [ ] Adding a line of logging (hello world)
-  - [ ] Creating a gen server
-  - [ ] Creating a model
-  - [ ] Using a redis wrapper
-  - [ ] Writing a web API to get/put data
+- migration guide for pinto..
+- Update all examples for Pinto 2.0 and Stetson 2.0
+- Remove Docker crap (nix all the way)
+- Vim documentation for PLS/etc
+- Nix documentation for PLS/etc
