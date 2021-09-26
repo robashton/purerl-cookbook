@@ -20,7 +20,7 @@ This is followed (presently) by some overrides of packages that exist within the
 .. literalinclude:: /demo-ps/server/packages.dhall
   :language: dhall
   :linenos:
-  :lines: 3-21
+  :lines: 3-
 
 This gives us an amount of flexibility to work on both a stable set of packages as well as actively developed/updated packages that we might ourselves be maintaining.
 

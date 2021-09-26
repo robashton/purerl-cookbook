@@ -1,9 +1,9 @@
 Messaging
 #########
 
-Another chapter called "messaging", because this *is* Erlang after all.
+Yes - another chapter called "messaging", because this *is* Erlang after all.
 
-It is very common for legacy APIs to send arbitary messages back to the invoking process, convenient, useful, handy... not practical in Purescript however. 
+It is very common for legacy APIs to send arbitary messages back to the invoking process as a means of communication, convenient, useful, handy... not immediately practical in Purescript however. 
 
 Consider the following code, where in Erlang we subscribe to some API that immediately starts sending us some sort of erlang tuple/record.
 
@@ -59,10 +59,33 @@ A further call into the LegacyApi wrapper could unpack this of course so this do
 
 This *might* be okay, but it means if we want to receive any other kind of message we are out of luck unless we pack *them* into Foreign as well, and ask various mappers to attempt to unpack these foreigns in sequence until one works and oh boy this is not enjoyable in the slightest.
 
+.. code-block:: haskell
+
+  do 
+    _subscription <- LegacyApi.start
+    _subscription2 <- LegacyApi2.start
+
+    msg :: Foreign <- receive
+
+    let ourMsg :: Msg
+        ourMsg = case LegacyApi.interpretForeign msg of 
+                    Just r -> Just $ LegacyMsg r
+                    Nothing -> LegacyMsg2 <$> LegacyApi2.interpretForeign msg
+                    
+
+This can somewhat get out of hand as we interact with more APIs and isn't a terribly forthright way of doing business, what we really want to write is 
+
+.. code-block:: haskell
+
+  do 
+    msg <- receive
+
+and that be the end of it
+
 The choices
 ***********
 
-It'd be nice to be able to unpack these Foreigns into sensible types, and to do this we have the following options
+It'd be nice to be able to unpack these Foreigns into sensible types before we see them in our process, and to do this we have the following options
 
 * :doc:`Routing <messaging-routing>` - intercept the messages with a proxy process and lift them into more appropriate types before sending them to the owning process
 * :doc:`Untagged Unions <messaging-untagged>` - describe the messages with an ADT and have them matched inline into more appropriate types

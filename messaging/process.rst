@@ -5,45 +5,42 @@ Using gen servers for absolutely everything is very much overkill, quite often w
 
 We'll build up that as the example here because it's such a common pattern. 
 
-
 Spinning up a child process
 ===========================
 
 The bare minimum to spin up a child process is
 
 * Define the type of message it will expect to receive
-* Define a function that will receive *(SpawnedProcessState msg)* and return *Effect Unit*
+* Define a function that will operate within the context of the newly spawned child process (the ProcessM Monad)
 
 .. code-block:: haskell
 
   data ChildMsg = Tick
 
-  childProcess :: SpawnedProcessState ChildMsg -> Effect Unit
-  childProcess s = pure unit
+  childProcess :: ProcessM ChildMsg Unit
+  childProcess = pure unit
 
-  init :: Gen.Init Msg State
+  init :: Effect Unit
   init = do
-    _ <- Gen.lift $ Process.spawnLink childProcess
-    pure {}
+    _ <- Process.spawnLink childProcess
 
 Now in this example, the process will start up and then immediately terminate because we don't do anything in the function invoked as part  of spawnLink - we did say the bare minimum required..
 
-We can change this to wait for a message indefinitely and *then* exit by using the functions given to us in SpawnedProcessState
+We can change this to wait for a message indefinitely and *then* exit by using the functions given to us in the ProcessM context.
 
 .. code-block:: haskell
 
   data ChildMsg = Tick
 
-  childProcess :: SpawnedProcessState ChildMsg -> Effect Unit
-  childProcess s@{ receive } = do
+  childProcess :: ProcessM ChildMsg Unit
+  childProcess = do 
     msg <- receive
     case msg of
       Tick -> pure unit
 
-  init :: Gen.Init Msg State
+  init :: Effect Unit
   init = do
-    _ <- Gen.lift $ Process.spawnLink childProcess
-    pure {}
+    _ <- Process.spawnLink childProcess
 
 
 Or indeed, wait for a message and then loop and wait for a message again
@@ -51,68 +48,79 @@ Or indeed, wait for a message and then loop and wait for a message again
 
 .. code-block:: haskell
 
-  data ChildMsg = Tick
+  data ChildMsg 
+    = Tick
+    | Exit
 
-  childProcess :: SpawnedProcessState ChildMsg -> Effect Unit
-  childProcess s@{ receive } = do
+  childProcess :: ProcessM ChildMsg Unit
+  childProcess = do
     msg <- receive
     case msg of
-      Tick -> -- do something
-        childProcess s
+      Tick -> do
+        log "tick"
+        childProcess 
+      Exit -> pure unit
 
-  init :: Gen.Init Msg State
+  init :: Effect Unit
   init = do
-    _ <- Gen.lift $ Process.spawnLink childProcess
-    pure {}
+    _ <- Process.spawnLink childProcess
+
+
+Note: an Exit value was added in this example, as *some* branch of the function *has* to return the expected type (unit), or the compiler will get upset.
 
 So how we do we send this newly awakened process a message? We're presently discarding the result of spawnLink - which is of type *Process ChildMsg*, so we'll want that obviously.
 
 .. code-block:: haskell
 
-  data ChildMsg = Tick
+  data ChildMsg 
+    = Tick
+    | Exit
 
-  childProcess :: SpawnedProcessState ChildMsg -> Effect Unit
-  childProcess s@{ receive } = do
+  childProcess :: ProcessM ChildMsg Unit
+  childProcess = do
     msg <- receive
     case msg of
-      Tick -> -- do something
-        childProcess s
+      Tick -> do
+        log "tick"
+        childProcess 
+      Exit -> pure unit
 
-  init :: Gen.Init Msg State
+  init :: Effect Unit
   init = do
-    child <- Gen.lift $ Process.spawnLink childProcess
+    child <- Process.spawnLink childProcess
     child ! Tick
-    pure { child }
 
 
-Next up we'll probably want to get a message back from our long running process, to do that we'll want to pass the *childProcess* a reference to ourself so it can do that. Rather than trying to separate our datatypes with emitters, it's easiest to just give it a *Process Msg*, where Msg is our Gen server's msg type. Typically in this sort of setup the code is tightly coupled anyway because we're just trying to orchestrate a long running process within the same module and setting up layers of indirection isn't helpful when trying to re-read the code later.
-
+Next up we'll probably want to get a message back from our long running process, to do that we'll probably want to pass it a pid or a process - so let's move into the context of a GenServer and spin up a child process from there.
 
 .. code-block:: haskell
 
-  data ChildMsg = Tick
-  data Msg = Response
+  data ChildMsg 
+    = Tick
+    | Exit
 
-  childProcess :: Process Msg -> SpawnedProcessState ChildMsg -> Effect Unit
-  childProcess parent s@{ receive } = do
+  data Msg 
+    = Response
+
+  childProcess :: Process Msg -> ProcessM ChildMsg Unit
+  childProcess parent = do
     msg <- receive
     case msg of
-      Tick -> 
+      Tick -> do
         parent ! Response
-        childProcess parent s
+        childProcess parent
+      Exit -> pure unit
 
-  init :: Gen.Init Msg State
+  init :: InitFn Unit Unit Msg {}
   init = do
-    self <- Gen.self
-    child <- Gen.lift $ Process.spawnLink $ childProcess self
+    self <- self
+    child <- Process.spawnLink $ childProcess self
     child ! Tick
-    pure { child }
 
-  handleInfo :: Msg -> State -> Gen.HandleInfo State Msg
+  handleInfo :: InfoFn Unit Unit Msg State
   handleInfo msg state =
     case msg of 
       Response -> ...
 
-And voila, we have an arbitrary process spun up via spawnLink capable of being sent messages and sending messages back to its parent. All typed, all safe and remarkably compact.
-
+And voila, now we have a gen server that starts a child process that when sent a 'Tick' message, responds to use with a 'Response' message and it's all type safe thanks to the wonders of Purescript.
 

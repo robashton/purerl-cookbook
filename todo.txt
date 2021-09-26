@@ -1,8 +1,6 @@
 Here we go again..
 ====
 
-- migration guide for pinto..
 - Update all examples for Pinto 2.0 and Stetson 2.0
-- Remove Docker crap (nix all the way)
-- Vim documentation for PLS/etc
-- Nix documentation for PLS/etc
+- Add all imports to all examples?
+- Where possible, link to concrete examples in demo-ps?

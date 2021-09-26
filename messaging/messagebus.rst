@@ -50,21 +50,21 @@ From another process or module, we only need call *subscribe*, passing in the bu
            | DoSomething String
            | StreamMessage StreamReader.BusMessage
 
-  init :: Gen.Init State Msg
+  init :: InitFn Unit Unit Msg State
   init = do
-    self <- Gen.self
-    _ <- Gen.lift $ SimpleBus.subscribe StreamReader.bus $ StreamMessage >>> send self
-    pure $ {}
+    self <- self
+    _ <- liftEffect $ SimpleBus.subscribe StreamReader.bus $ send self <<<  StreamMessage
+    pure $ InitOk {}
 
-  handleInfo :: Msg -> State -> Gen.HandleInfo State Msg
+  handleInfo :: InfoFn Unit Unit Msg State
   handleInfo msg state = do
     case msg of
       Tick  -> 
-        Gen.lift $ handleTick state
+        handleTick state
       DoSomething what  -> 
-        Gen.lift $ handleSomething what state
+        handleSomething what state
       ReaderMessage msg  -> 
-        Gen.lift $ handleReaderMessage msg state
+        handleReaderMessage msg state
 
 We can see clearly here the pattern of lifting an external module's message into our own type so we can handle it in our *handleInfo* dispatch loop. 
 
@@ -77,11 +77,11 @@ However, it's worth pointing out that *SimpleBus.subscribe* actually returns a r
 
 .. code-block:: haskell
 
-  init :: Gen.Init State Msg
+  init :: InitFn Unit Unit Msg State
   init = do
-    self <- Gen.self
-    busRef <- Gen.lift $ SimpleBus.subscribe StreamReader.bus $ StreamMessage >>> send self
-    pure $ { busRef: Just busRef }
+    self <- self
+    busRef <- liftEffect $ SimpleBus.subscribe StreamReader.bus $ send self <<< StreamMessage
+    pure $ InitOk { busRef: Just busRef }
 
 
   unsubscribe :: State -> Effect State

@@ -34,3 +34,8 @@ Erlang is the original language that compiles into BEAM, which is what is execut
 ***************************************************
 
 Rebar3 is a build tool for Erlang which reads the configuration for the project and pulls down dependencies and knows how to invoke the Erlang compiler on both those dependencies and the code written within the project. It also knows  how to read various other assets in the project in order to package them up for release.
+
+
+`Purescript Language Server <https://github.com/nwolverson/purescript-language-server>`_ 
+***************************************************
+*The* way to do add intelligence to your editor when working against Purescript

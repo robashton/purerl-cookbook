@@ -1,7 +1,7 @@
 Basic OTP
 #########
 
-As we keep uncovering, the basic hello world of an Erlang application isn't as simple or Hackernews friendly as a single file with a http web server in it. 
+As we keep uncovering, the basic hello world of an Erlang application isn't as simple or Hackernews friendly as a single file with a http web server in it (Elixir has managed this to an extent, but typically it just pushes the learning curve to the right and you still have to go up it eventually).
 
 In order to get something running, we need to
 

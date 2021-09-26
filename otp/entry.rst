@@ -19,4 +19,4 @@ What does this module look like?
   :language: haskell
   :linenos:
 
-Almost inconsequential. In our Erlang apps we sometimes do a bit of housekeeping as part of startup, but the most basic application is essentially a proxy for starting the top level supervisor, so Pinto provides *App.simpleStart* for that case.
+Almost inconsequential. In our production Erlang apps we might sometimes do a bit of housekeeping as part of start-up, but the most basic application is essentially a proxy for starting the top level supervisor, so Pinto provides *App.simpleStart* for that case.

@@ -9,7 +9,7 @@ A lot of interop is effectful, and care really must be taken to describe it as s
   { ok, Value } = legacy_api:read_from_database(Handle, Key).
 
 
-A naive implementation of an FFI module for this might look like this
+A *naive* implementation of an FFI module for this might look like this
 
 .. code-block:: haskell
 
