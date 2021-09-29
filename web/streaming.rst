@@ -6,62 +6,56 @@ A reasonably common pattern for streaming data to the client is to subscribe to 
 Loop from the onset
 *******************
 
-Again there is an entry point specifically for kicking off a Loop handler and callbacks for handling messages sent to the handler, we have
+Just like with WebSockets, the first step is to set up a handler with an appropriate message type, for the handler needs to receive messages to send down to the client in the form of some sort of data.
 
-* *Loop.handler* which is where we set up our initial state and start a streamed reply
-* *Loop.init* which is called immediately after with additional context (Loop.self now possible)
-* *Loop.info* for handling messages that we receive to our process
+.. literalinclude:: /demo-ps/server/src/BookWeb.purs
+  :language: haskell
+  :linenos:
+  :lines: 253-259
+
+Then, our init needs to send an initial response down to the client before signalling to Cowboy that we're to become a loop handler.
 
 .. code-block:: haskell
 
-  data DataStreamMessage = Data Binary
-                                             
-  dataStream :: StetsonHandler DataStreamMessage Unit
-  dataStream = Loop.handler (\req -> do
-                 req2 <- streamReply (StatusCode 200) Map.empty req
-                 Loop.initResult req2 unit)
+  loopInit req state = do 
+    self <- self
+    void $ liftEffect $ DataSource.registerClient $ send self <<< Data
+    pure state
 
-      # Loop.init (\req state -> do 
-                        self <- Loop.self
-                        void $ Loop.lift $  MonitorExample.registerClient $ send self <<< Data
-                        pure state)
+And then all that's left to do is define the handler for dealing with the messages that come in.
 
-      # Loop.info (\msg req state ->  do
-                  case msg of
-                       Data binary -> do
-                          _ <- Loop.lift $ streamBody binary req
-                          pure $ LoopOk req state
-                   )
+.. code-block:: haskell
 
+  loopInfo msg req state = do
+    case msg of
+      Data iodata -> do
+        -- Then stream that down to the client
+        void $ liftEffect $ streamBody iodata req
+        pure $ LoopOk req state
+      ...
 
 This is a simplified version of the code in demo_ps repo which also attaches a monitor to the remote process so the connection can be closed in case the data source goes missing.
 
 Switch to Loop from Rest
 ************************
 
-A common use-case across our codebases for streaming handlers, is to use the Rest handler to negotiate a sensible response based on stream availability, validation of the request, authorization, etc. This is possible in Stetson at any point but the most common place to perform this conversion is in the accept callback for returning the data.
+A common pattern across our codebases for streaming handlers, is to use the Rest callbacks to negotiate a sensible response based on auth/availability/etc and then switch into a looping handler for actually sending the data.
+
+.. literalinclude:: /demo-ps/server/src/BookWeb.purs
+  :language: haskell
+  :linenos:
+  :lines: 202-210
+ 
+We see here that our init kicks off the Rest workflow for which callbacks are also configured, but also there is a loopInit and loopInfo provided.
+
+In our content callback, once we've negotiated the various REST callbacks, we can signal to Cowboy that we want to stream the data now
+
+.. literalinclude:: /demo-ps/server/src/BookWeb.purs
+  :language: haskell
+  :linenos:
+  :lines: 238-244
+
+The full code for this can be found in the demo_ps repo.
 
 
-.. code-block:: haskell
 
-  data EventsWsMsg = BookMsg BookEvent
-
-  eventsFirehoseRest :: StetsonHandler EventsWsMsg Unit
-  eventsFirehoseRest =
-    emptyHandler (\req -> Rest.initResult req unit)
-      # Rest.allowedMethods (\req state -> Rest.result (Stetson.HEAD : Stetson.GET : Stetson.OPTIONS : nil) req state)
-      # Rest.contentTypesProvided (\req state -> Rest.result (streamEvents : nil) req state)
-      # Loop.init (\req state -> do
-                                self <- Loop.self
-                                _ <- Loop.lift $ SimpleBus.subscribe BookLibrary.bus $ BookMsg >>> send self
-                                pure state)
-      # Loop.info (\(BookMsg msg) req state ->  do
-            _ <- Loop.lift $ streamBody (stringToBinary $ writeJSON msg) req
-            pure $ LoopOk req state)
-      where 
-            streamEvents = tuple2 "application/json" (\req state -> do
-                           req2 <- streamReply (StatusCode 200) Map.empty req
-                           Rest.switchHandler LoopHandler req2 state)
-
-
-This is a simplified version of the code in the demo_ps project, but essentially we do some work with Rest handler, setting up an accept for *application/json*, which when invoked in *streamEvents* switches  to the LoopHandler by calling *Rest.switchHandler*. It is at *this* point that *Loop.init* will be invoked and then its just a plain ol' LoopHandler from that point on.

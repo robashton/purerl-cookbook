@@ -64,7 +64,7 @@ For getting hold of 'self', in most contexts there is a typeclass in Erl.Process
    :hidden:
    :titlesonly:
 
-   emitters
+   subscriptions
    messagebus
    monitors
    process
