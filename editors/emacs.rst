@@ -27,4 +27,4 @@ Feel free to send me a pull request for this page if you have a good Emacs set u
 Example configs
 ***************
 
-* `Steve Strong <https://github.com/srstrong/nix-env/tree/master/common/steve/files/doom>`_
+* `Steve Strong <https://github.com/srstrong/nix-env/tree/master/files/doom>`_
